@@ -1,0 +1,33 @@
+{
+  "title": "Brennstoffbörse Flüssiggas Tagespreise",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Flüssiggas Tagespreise",
+        "description": "Wähle Region und Abnahmemenge.",
+        "data": {
+          "region": "Region",
+          "volume_liters": "Abnahme (Liter)"
+        }
+      }
+    },
+    "error": {
+      "invalid_volume": "Ungültige Abnahmemenge"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Optionen",
+        "description": "Region und Abnahmemenge ändern.",
+        "data": {
+          "region": "Region",
+          "volume_liters": "Abnahme (Liter)"
+        }
+      }
+    },
+    "error": {
+      "invalid_volume": "Ungültige Abnahmemenge"
+    }
+  }
+}
