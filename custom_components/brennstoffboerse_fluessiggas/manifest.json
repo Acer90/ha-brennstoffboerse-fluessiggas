@@ -1,11 +1,15 @@
 {
-  "domain": "brennstoffboerse_fluessiggas",
-  "name": "Brennstoffbörse Flüssiggas Tagespreise",
-  "codeowners": [],
-  "config_flow": true,
-  "documentation": "https://brennstoffboerse.de/fluessiggas/fluessiggas-tagespreise.html",
-  "iot_class": "cloud_polling",
-  "issue_tracker": "",
-  "requirements": ["beautifulsoup4==4.12.3"],
-  "version": "0.1.0"
+    "domain":  "brennstoffboerse_fluessiggas",
+    "name":  "BrennstoffbÃ¶rse FlÃ¼ssiggas Tagespreise",
+    "codeowners":  [
+
+                   ],
+    "config_flow":  true,
+    "documentation":  "https://brennstoffboerse.de/fluessiggas/fluessiggas-tagespreise.html",
+    "iot_class":  "cloud_polling",
+    "issue_tracker":  "",
+    "requirements":  [
+                         "beautifulsoup4==4.12.3"
+                     ],
+    "version":  "0.1.1"
 }

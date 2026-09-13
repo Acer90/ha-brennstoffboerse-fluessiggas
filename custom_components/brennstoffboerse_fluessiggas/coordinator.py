@@ -8,6 +8,7 @@ from typing import Any
 
 from bs4 import BeautifulSoup
 
+from homeassistant.components import persistent_notification
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
@@ -34,6 +35,7 @@ class FluessiggasPriceData:
 
 _EURO_NUMBER_RE = re.compile(r"([±\+\-]?[0-9]+(?:[\.,][0-9]+)?)\s*€", re.IGNORECASE)
 _VOLUME_IN_HEADER_RE = re.compile(r"([0-9][0-9\.\s]{0,10})\s*L\b", re.IGNORECASE)
+_NOTIFICATION_ID_SUFFIX = "_update_failed"
 
 
 def _to_float_de(number_str: str) -> float:
@@ -143,7 +145,28 @@ class BrennstoffboerseFluessiggasCoordinator(DataUpdateCoordinator[FluessiggasPr
             update_interval=UPDATE_INTERVAL,
         )
 
+    @property
+    def _update_failure_notification_id(self) -> str:
+        return f"{self.entry.entry_id}{_NOTIFICATION_ID_SUFFIX}"
+
     async def _async_update_data(self) -> FluessiggasPriceData:
+        try:
+            data = await self._async_fetch_data()
+        except UpdateFailed as err:
+            persistent_notification.async_create(
+                self.hass,
+                f"Die Flüssiggaspreise konnten nicht abgerufen werden: {err}",
+                title="Brennstoffbörse: Datenabruf fehlgeschlagen",
+                notification_id=self._update_failure_notification_id,
+            )
+            raise
+
+        persistent_notification.async_dismiss(
+            self.hass, self._update_failure_notification_id
+        )
+        return data
+
+    async def _async_fetch_data(self) -> FluessiggasPriceData:
         region = str(self.entry.options.get(CONF_REGION, self.entry.data.get(CONF_REGION, ""))).strip()
         volume_liters = int(
             self.entry.options.get(

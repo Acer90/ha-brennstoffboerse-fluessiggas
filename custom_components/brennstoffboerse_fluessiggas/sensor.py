@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from homeassistant.components.sensor import SensorEntity, SensorEntityDescription
+from homeassistant.components.sensor import SensorEntity, SensorEntityDescription, SensorStateClass
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
@@ -23,12 +23,14 @@ DESCRIPTIONS: tuple[BrennstoffDescription, ...] = (
         name="Flüssiggas Preis",
         kind="price",
         native_unit_of_measurement="EUR/100L",
+        state_class=SensorStateClass.MEASUREMENT,
     ),
     BrennstoffDescription(
         key="change",
         name="Flüssiggas Preisänderung",
         kind="change",
         native_unit_of_measurement="EUR/100L",
+        state_class=SensorStateClass.MEASUREMENT,
     ),
 )
 
