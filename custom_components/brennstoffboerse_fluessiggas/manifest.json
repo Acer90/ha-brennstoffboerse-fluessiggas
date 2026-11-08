@@ -1,6 +1,6 @@
 {
     "domain":  "brennstoffboerse_fluessiggas",
-    "name":  "BrennstoffbÃ¶rse FlÃ¼ssiggas Tagespreise",
+    "name":  "BrennstoffbÃƒÂ¶rse FlÃƒÂ¼ssiggas Tagespreise",
     "codeowners":  [
 
                    ],
@@ -11,5 +11,5 @@
     "requirements":  [
                          "beautifulsoup4==4.12.3"
                      ],
-    "version":  "0.1.1"
+    "version":  "0.1.2"
 }
